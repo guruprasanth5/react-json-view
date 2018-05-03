@@ -48,6 +48,7 @@ class VariableEditor extends React.Component {
             namespace,
             indentWidth,
             enableClipboard,
+            enableCopyPath,
             onEdit,
             onDelete,
             onSelect,
@@ -72,38 +73,38 @@ class VariableEditor extends React.Component {
                         <div {...Theme(theme, "colon")}>:</div>
                     </span>
                 ) : (
-                    <span>
-                        <span
-                            {...Theme(theme, "object-name")}
-                            class="object-key"
-                            key={variable.name + "_" + namespace}
-                        >
-                            <span style={{ verticalAlign: "top" }}>"</span>
-                            <span style={{ display: "inline-block" }}>
-                                {variable.name}
+                        <span>
+                            <span
+                                {...Theme(theme, "object-name")}
+                                class="object-key"
+                                key={variable.name + "_" + namespace}
+                            >
+                                <span style={{ verticalAlign: "top" }}>"</span>
+                                <span style={{ display: "inline-block" }}>
+                                    {variable.name}
+                                </span>
+                                <span style={{ verticalAlign: "top" }}>"</span>
                             </span>
-                            <span style={{ verticalAlign: "top" }}>"</span>
+                            <span {...Theme(theme, "colon")}>:</span>
                         </span>
-                        <span {...Theme(theme, "colon")}>:</span>
-                    </span>
-                )}
+                    )}
                 <div
                     class="variable-value"
                     onClick={
                         onSelect === false && onEdit === false
                             ? null
                             : e => {
-                                  let location = [...namespace]
-                                  if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
-                                      this.prepopInput(variable)
-                                  } else if (onSelect !== false) {
-                                      location.shift()
-                                      onSelect({
-                                          ...variable,
-                                          namespace: location
-                                      })
-                                  }
-                              }
+                                let location = [...namespace]
+                                if ((e.ctrlKey || e.metaKey) && onEdit !== false) {
+                                    this.prepopInput(variable)
+                                } else if (onSelect !== false) {
+                                    location.shift()
+                                    onSelect({
+                                        ...variable,
+                                        namespace: location
+                                    })
+                                }
+                            }
                     }
                     {...Theme(theme, "variableValue", {
                         cursor: onSelect === false ? "default" : "pointer"
@@ -116,9 +117,20 @@ class VariableEditor extends React.Component {
                         hidden={editMode}
                         src={variable.value}
                         clickCallback={enableClipboard}
+                        copyType="value"
                         {...{ theme, namespace }}
                     />
                 ) : null}
+                {enableCopyPath ?
+                    <CopyToClipboard
+                        hidden={editMode}
+                        src={this.props.path.join('.')}
+                        copyType="path"
+                        clickCallback={enableCopyPath}
+                        {...{ theme, namespace }}
+                    />
+                    :
+                    null}
                 {onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null}

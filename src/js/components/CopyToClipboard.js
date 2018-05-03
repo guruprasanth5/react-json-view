@@ -65,13 +65,13 @@ export default class extends React.Component {
         if (this.state.copied) {
             return (
                 <span>
-                    <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
+                    <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} copyType={this.props.copyType}/>
                     <span {...Theme(theme, "copy-icon-copied")}>✔</span>
                 </span>
             )
         }
 
-        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} />
+        return <Clippy class="copy-icon" {...Theme(theme, "copy-icon")} copyType={this.props.copyType}/>
     }
 
     clipboardValue = value => {

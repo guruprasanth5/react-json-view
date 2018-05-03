@@ -45,6 +45,7 @@ export default class extends React.Component {
         groupArraysAfterLength: 100,
         indentWidth: 4,
         enableClipboard: true,
+        enableCopyPath: true,
         displayObjectSize: true,
         displayDataTypes: true,
         onEdit: false,
@@ -53,7 +54,8 @@ export default class extends React.Component {
         onSelect: false,
         iconStyle: "triangle",
         style: {},
-        validationMessage: "Validation Error"
+        validationMessage: "Validation Error",
+        path:['$a1']
     }
 
     getListeners = () => {

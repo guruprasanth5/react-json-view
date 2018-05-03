@@ -193,10 +193,10 @@ class rjvObject extends React.Component {
                 {this.getBraceStart(object_type, expanded)}
                 {expanded
                     ? this.getObjectContent(depth, src, {
-                          theme,
-                          iconStyle,
-                          ...rest
-                      })
+                        theme,
+                        iconStyle,
+                        ...rest
+                    })
                     : this.getEllipsis()}
                 <span class="brace-row">
                     <span
@@ -218,7 +218,8 @@ class rjvObject extends React.Component {
             depth,
             parent_type,
             index_offset,
-            groupArraysAfterLength
+            groupArraysAfterLength,
+            path = []
         } = this.props
         const { namespace, object_type } = this.state
         let theme = props.theme
@@ -227,6 +228,13 @@ class rjvObject extends React.Component {
 
         for (let name in variables) {
             variable = new JsonVariable(name, variables[name])
+            let newPath = path.slice()
+
+            if (Array.isArray(variables)) {
+                newPath[newPath.length - 1] = newPath[newPath.length - 1] + '[' + name + ']'
+            } else {
+                newPath = path.concat([variable.name])
+            }
 
             if (parent_type == "array_group" && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset
@@ -243,6 +251,7 @@ class rjvObject extends React.Component {
                         namespace={namespace.concat(variable.name)}
                         parent_type={object_type}
                         {...props}
+                        path={newPath}
                     />
                 )
             } else if (variable.type == "array") {
@@ -265,6 +274,7 @@ class rjvObject extends React.Component {
                         type="array"
                         parent_type={object_type}
                         {...props}
+                        path={newPath}
                     />
                 )
             } else {
@@ -276,6 +286,7 @@ class rjvObject extends React.Component {
                         namespace={namespace}
                         type={this.props.type}
                         {...props}
+                        path={newPath}
                     />
                 )
             }
