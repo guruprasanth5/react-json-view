@@ -55,7 +55,7 @@ export default class extends React.Component {
         iconStyle: "triangle",
         style: {},
         validationMessage: "Validation Error",
-        path:['$a1']
+        path:[]
     }
 
     getListeners = () => {
