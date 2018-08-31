@@ -3,6 +3,7 @@ import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard'
 import { toType } from './../helpers/util';
+import MaskIcon from '../components/maskIcon';
 
 //icons
 import {
@@ -14,6 +15,11 @@ import Theme from './../themes/getStyle';
 
 
 export default class extends React.Component {
+
+    state = {
+        toggle:false
+    }
+
     getObjectSize = () => {
         const { size, theme, displayObjectSize } = this.props;
         if (displayObjectSize) {
@@ -107,6 +113,7 @@ export default class extends React.Component {
             onAdd,
             enableClipboard,
             enableCopyPath,
+            enableMask,
             src,
             namespace,
             path
@@ -120,21 +127,40 @@ export default class extends React.Component {
                 {/* size badge display */}
                 {this.getObjectSize()}
                 {/* copy to clipboard icon */}
-                {enableClipboard
-                    ? (<CopyToClipboard
-                        clickCallback={enableClipboard}
-                        copyType="value"
-                        {...{ src, theme, namespace }} />)
-                    : null
-                }
-                {enableCopyPath ?
-                    <CopyToClipboard
-                        clickCallback={enableClipboard}
-                        copyType="path"
-                        {...{ theme, namespace }}
-                         src={path.join('.')}/>
-                    :
-                    null}
+                <div className="vertical-align" onClick={() => {
+                        this.setState({toggle:!this.state.toggle})
+                    }}>
+                        <img src="https://www.shareicon.net/data/128x128/2015/10/17/657500_vertical_512x512.png" style={{"width":"20px","height":"17px"}}/>
+                    {this.state.toggle ? 
+                    <span className="edit-icons-json">
+                        {enableClipboard
+                            ? (<CopyToClipboard
+                                clickCallback={enableClipboard}
+                                copyType="value"
+                                name="copy"
+                                {...{ src, theme, namespace }} />)
+                            : null
+                        }
+                        {enableCopyPath ?
+                            <CopyToClipboard
+                                clickCallback={enableClipboard}
+                                copyType="path"
+                                name="path"
+                                {...{ theme, namespace }}
+                                src={path.join('.')}/>
+                            :
+                            null}
+                        {enableMask ? 
+                             <MaskIcon {...this.props}/>
+                        :null}
+                        </span>
+                    : null}
+                    {this.state.toggle ? <div className="element-div" onClick = {() => {
+                        this.setState({
+                            toggle:false
+                        })
+                    }}></div>:null}
+                </div>
                 {/* copy add/remove icons */}
                 {onAdd !== false ? this.getAddAttribute() : null}
                 {onDelete !== false ? this.getRemoveObject() : null}

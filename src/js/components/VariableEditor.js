@@ -6,6 +6,7 @@ import dispatcher from "./../helpers/dispatcher"
 import parseInput from "./../helpers/parseInput"
 import stringifyVariable from "./../helpers/stringifyVariable"
 import CopyToClipboard from "./CopyToClipboard"
+import MaskIcon from './maskIcon';
 
 //data type components
 import {
@@ -32,10 +33,12 @@ class VariableEditor extends React.Component {
         editMode: false,
         editValue: "",
         renameKey: false,
+        toggle:false,
         parsedInput: {
             type: false,
             value: null
         }
+
     }
 
     render() {
@@ -49,9 +52,13 @@ class VariableEditor extends React.Component {
             indentWidth,
             enableClipboard,
             enableCopyPath,
+            enableMask,
+            enableEllipsis,
             onEdit,
             onDelete,
             onSelect,
+            onMask,
+            onUnMask,
             rjvId
         } = this.props
         const { editMode } = this.state
@@ -112,7 +119,49 @@ class VariableEditor extends React.Component {
                 >
                     {this.getValue(variable, editMode)}
                 </div>
-                {enableClipboard ? (
+                {enableEllipsis ? 
+                    <div className="vertical-align" onClick={() => {
+                        this.setState({toggle:!this.state.toggle})
+                    }}>
+                        <img src="https://www.shareicon.net/data/128x128/2015/10/17/657500_vertical_512x512.png" style={{"width":"20px","height":"17px"}}/>
+                    {this.state.toggle ? 
+                        <span className="edit-icons-json">
+                            {enableClipboard ? 
+                                <CopyToClipboard
+                                    hidden={editMode}
+                                    src={variable.value}
+                                    clickCallback={enableClipboard}
+                                    copyType="value"
+                                    name="copy"
+                                    {...{ theme, namespace }}
+                                />
+                            : null}
+
+                            {enableCopyPath ?
+                                <CopyToClipboard
+                                    hidden={editMode}
+                                    src={this.props.path.join('.')}
+                                    copyType="path"
+                                    name="path"
+                                    clickCallback={enableCopyPath}
+                                    {...{ theme, namespace }}
+                                />
+                                :
+                                null}
+                                {enableMask ?
+                                    <MaskIcon {...this.props}/>
+                     
+                                    : null}
+                            </span>
+                    :null}
+                    </div>
+                : null}
+                {this.state.toggle ? <div className="element-div" onClick = {() => {
+                    this.setState({
+                        toggle:false
+                    })
+                }}></div>:null}
+                {/* {enableClipboard ? (
                     <CopyToClipboard
                         hidden={editMode}
                         src={variable.value}
@@ -131,6 +180,16 @@ class VariableEditor extends React.Component {
                     />
                     :
                     null}
+                {enableMask ?
+                    <MaskIcon {...this.props}/>
+                    // <CopyToClipboard
+                    //     hidden={editMode}
+                    //     src={this.props.path.join('.')}
+                    //     copyType="path"
+                    //     clickCallback={enableCopyPath}
+                    //     {...{ theme, namespace }}
+                    // /> 
+                : null} */}
                 {onEdit !== false && editMode == false
                     ? this.getEditIcon()
                     : null}

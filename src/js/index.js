@@ -46,6 +46,7 @@ export default class extends React.Component {
         indentWidth: 4,
         enableClipboard: true,
         enableCopyPath: true,
+        enableEllipsis:true,
         displayObjectSize: true,
         displayDataTypes: true,
         onEdit: false,
@@ -55,7 +56,12 @@ export default class extends React.Component {
         iconStyle: "triangle",
         style: {},
         validationMessage: "Validation Error",
-        path:[]
+        path:[],
+        masked:[],
+        enableMask:true,
+        onMask:()=>{},
+        onUnMask:()=>{},
+        maskData:[['array', '[]', '0'],['array', '[]', '3'], ['array', '[]', '2']]
     }
 
     getListeners = () => {

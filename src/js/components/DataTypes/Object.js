@@ -214,13 +214,16 @@ class rjvObject extends React.Component {
     }
 
     renderObjectContents = (variables, props) => {
+        console.log("props", props);
         const {
             depth,
             parent_type,
             index_offset,
             groupArraysAfterLength,
-            path = []
+            path = [],
+            masked = []
         } = this.props
+        // console.log("path-----", path, masked)
         const { namespace, object_type } = this.state
         let theme = props.theme
         let elements = [],
@@ -228,13 +231,18 @@ class rjvObject extends React.Component {
 
         for (let name in variables) {
             variable = new JsonVariable(name, variables[name])
-            let newPath = path.slice()
+            let newPath = path.slice();
+            let newMasked = masked.slice();
+            // console.log("variables", newPath, variable);
 
             if (Array.isArray(variables)) {
                 newPath[newPath.length - 1] = newPath[newPath.length - 1] + '[' + name + ']'
+                newMasked = newMasked.concat(["[]", name])
             } else {
                 newPath = path.concat([variable.name])
+                newMasked = masked.concat([variable.name])
             }
+            console.log("newPath",newMasked, newPath);
 
             if (parent_type == "array_group" && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset
@@ -252,6 +260,7 @@ class rjvObject extends React.Component {
                         parent_type={object_type}
                         {...props}
                         path={newPath}
+                        masked = {newMasked}
                     />
                 )
             } else if (variable.type == "array") {
@@ -275,6 +284,7 @@ class rjvObject extends React.Component {
                         parent_type={object_type}
                         {...props}
                         path={newPath}
+                        masked = {newMasked}
                     />
                 )
             } else {
@@ -287,6 +297,7 @@ class rjvObject extends React.Component {
                         type={this.props.type}
                         {...props}
                         path={newPath}
+                        masked = {newMasked}
                     />
                 )
             }

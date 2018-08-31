@@ -65,7 +65,8 @@ export default class extends React.Component {
         if (this.state.copied) {
             return (
                 <span>
-                    <Clippy class={"copy-icon "+ this.props.copyType} {...Theme(theme, "copy-icon")} copyType={this.props.copyType}/>
+                    <Clippy class={"copy-icon "+ this.props.copyType} {...Theme(theme, "copy-icon")} copyType={this.props.copyType} name={this.props.name} />
+                    {/* {this.props.name === "copy" ? <span className="copy-text">Copy</span>:<span className="path-text">Path</span>} */}
                     <span {...Theme(theme, "copy-icon-copied")}>✔</span>
                 </span>
             )

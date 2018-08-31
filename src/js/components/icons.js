@@ -147,6 +147,7 @@ export class Clippy extends React.Component {
                         </g>
                     }
                 </svg>
+                {copyType === 'path' ? <span className="copy-text">Path</span>:<span className="copy-text">Copy</span>}
             </span>
         );
     }
