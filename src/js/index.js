@@ -61,7 +61,17 @@ export default class extends React.Component {
         enableMask:true,
         onMask:()=>{},
         onUnMask:()=>{},
-        maskData:[['array', '[]', '0'],['array', '[]', '3'], ['array', '[]', '2']]
+        maskData:{
+            a:{
+                b:[
+                    {
+                        c:''
+                    },{
+                        c:''
+                    }
+                ]
+            }
+        }
     }
 
     getListeners = () => {

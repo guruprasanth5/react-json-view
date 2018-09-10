@@ -15,16 +15,38 @@ import _ from 'lodash';
         this.findMask()
     }
 
-    findMask() {
+    findMask(maskData) {
     
         var maskData = this.props.maskData;
         // var d = _.map(maskData, (obj) => {
         //     console.log("d", data);
         //     // return data
         // })
-        var data = _.find(maskData, this.props.mask);
+        // var data = _.find(maskData, this.props.mask);
         
-        console.log("data",data);
+        // console.log("data",data);
+
+
+        // Object.keys(maskData).map((key) => {
+        //     var result = []
+        //     var objKey = maskData[key];
+        //     console.log("objKey", objKey)
+        //     if(typeof objKey === "object") {
+        //         console.log("test");
+        //         result.push([key])
+        //         if(typeof objKey == "object" && Array.isArray(objKey)) {  
+        //             console.log("dsdsasda");  
+        //             maskData[key].map((obj) => {
+        //                     result.push([objKey,"[]", obj])
+        //                 })
+        //         }
+        //         // this.findMask(maskData);
+        //     } 
+            
+                
+            
+            //console.log("result", result);
+        //})
 
     }
 
