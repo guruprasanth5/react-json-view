@@ -71,7 +71,7 @@ class VariableEditor extends React.Component {
                 {...Theme(theme, "objectKeyVal", {
                     paddingLeft: indentWidth * singleIndent
                 })}
-                class="variable-row"
+                class={isMasked ? "variable-row active":"variable-row"}
                 key={variable.name}
             >
                 {type == "array" ? (
@@ -99,7 +99,7 @@ class VariableEditor extends React.Component {
                         </span>
                     )}
                 <div
-                    class="variable-value"
+                    class={isMasked ? "variable-value active":"variable-value"}
                     onClick={
                         onSelect === false && onEdit === false
                             ? null

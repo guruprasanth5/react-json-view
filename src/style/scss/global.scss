@@ -56,7 +56,24 @@
         }
     }
 
+    .variable-value {
+        &.active {
+            div {
+                background: yellow;
+            }
+        }
+    }
+
     .variable-row {
+        &.active {
+            span {
+                span {
+                    &.object-key {
+                        background: yellow;
+                    }
+                }
+            }
+        }
         &:hover {
             & .copy-to-clipboard-container {
                 display: inline-block;

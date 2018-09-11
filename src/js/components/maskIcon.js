@@ -13,7 +13,7 @@ class MaskIcon extends Component {
 
         // console.log("this.props",this.props.masked, this.props.maskData);
         this.props.onMask(this.props.masked);
-        this.findMask()
+        // this.findMask()
     }
 
     unMaskClickHandler(){
