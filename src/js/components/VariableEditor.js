@@ -4,6 +4,7 @@ import AutosizeTextarea from "react-textarea-autosize"
 import { toType } from "./../helpers/util"
 import dispatcher from "./../helpers/dispatcher"
 import parseInput from "./../helpers/parseInput"
+import {includes} from "./../helpers/util"
 import stringifyVariable from "./../helpers/stringifyVariable"
 import CopyToClipboard from "./CopyToClipboard"
 import MaskIcon from './maskIcon';
@@ -59,10 +60,12 @@ class VariableEditor extends React.Component {
             onSelect,
             onMask,
             onUnMask,
-            rjvId
+            rjvId,
+            maskData,
+            masked
         } = this.props
         const { editMode } = this.state
-
+        let isMasked = includes(maskData,masked)
         return (
             <div
                 {...Theme(theme, "objectKeyVal", {
@@ -149,7 +152,7 @@ class VariableEditor extends React.Component {
                                 :
                                 null}
                                 {enableMask ?
-                                    <MaskIcon {...this.props}/>
+                                    <MaskIcon {...this.props} isMasked={isMasked}/>
                      
                                     : null}
                             </span>

@@ -4,6 +4,7 @@ import dispatcher from './../helpers/dispatcher';
 import CopyToClipboard from './CopyToClipboard'
 import { toType } from './../helpers/util';
 import MaskIcon from '../components/maskIcon';
+import {includes} from "./../helpers/util"
 
 //icons
 import {
@@ -116,8 +117,11 @@ export default class extends React.Component {
             enableMask,
             src,
             namespace,
-            path
+            path,
+            masked,
+            maskData
         } = this.props;
+        let isMasked = includes(maskData,masked)
         return (
             <div {...Theme(theme, 'object-meta-data')}
                 class='object-meta-data'
@@ -151,7 +155,7 @@ export default class extends React.Component {
                             :
                             null}
                         {enableMask ? 
-                             <MaskIcon {...this.props}/>
+                             <MaskIcon {...this.props} isMasked={isMasked}/>
                         :null}
                         </span>
                     : null}

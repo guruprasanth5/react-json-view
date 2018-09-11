@@ -2,7 +2,7 @@ import React from 'react';
 import JsonViewer from './components/JsonViewer';
 import AddKeyRequest from './components/ObjectKeyModal/AddKeyRequest';
 import ValidationFailure from './components/ValidationFailure';
-import {toType, isTheme} from './helpers/util';
+import { toType, isTheme } from './helpers/util';
 import ObjectAttributes from './stores/ObjectAttributes';
 
 //global theme
@@ -46,7 +46,7 @@ export default class extends React.Component {
         indentWidth: 4,
         enableClipboard: true,
         enableCopyPath: true,
-        enableEllipsis:true,
+        enableEllipsis: true,
         displayObjectSize: true,
         displayDataTypes: true,
         onEdit: false,
@@ -56,22 +56,12 @@ export default class extends React.Component {
         iconStyle: "triangle",
         style: {},
         validationMessage: "Validation Error",
-        path:[],
-        masked:[],
-        enableMask:true,
-        onMask:()=>{},
-        onUnMask:()=>{},
-        maskData:{
-            a:{
-                b:[
-                    {
-                        c:''
-                    },{
-                        c:''
-                    }
-                ]
-            }
-        }
+        path: [],
+        masked: [],
+        enableMask: true,
+        onMask: () => { },
+        onUnMask: () => { },
+        maskData: []
     }
 
     getListeners = () => {
@@ -157,7 +147,7 @@ export default class extends React.Component {
         this.state.addKeyRequest = false;
         this.state.editKeyRequest = false;
         return (<div class="react-json-view"
-            style={{...Theme(props.theme, 'app-container').style, ...style}} >
+            style={{ ...Theme(props.theme, 'app-container').style, ...style }} >
             <ValidationFailure
                 message={validationMessage}
                 active={validationFailure}
@@ -186,7 +176,7 @@ export default class extends React.Component {
         } = ObjectAttributes.get(
             this.rjvId, 'action', 'variable-update'
         );
-        let {onEdit, onDelete, onAdd} = this.state;
+        let { onEdit, onDelete, onAdd } = this.state;
         let result;
 
         const on_edit_payload = {
@@ -220,7 +210,7 @@ export default class extends React.Component {
     }
 
     addKeyRequest = () => {
-        this.setState({addKeyRequest: true});
+        this.setState({ addKeyRequest: true });
     }
 
     resetState = () => {

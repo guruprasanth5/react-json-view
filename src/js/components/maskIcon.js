@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import _ from 'lodash';
- class MaskIcon extends Component {
+class MaskIcon extends Component {
     constructor(props) {
         super(props);
-        
+
         this.maskClickHandler = this.maskClickHandler.bind(this);
+        this.unMaskClickHandler = this.unMaskClickHandler.bind(this);
         this.findMask = this.findMask.bind(this);
     }
 
@@ -15,15 +16,19 @@ import _ from 'lodash';
         this.findMask()
     }
 
+    unMaskClickHandler(){
+        this.props.onUnMask(this.props.masked);
+    }
+
     findMask(maskData) {
-    
+
         var maskData = this.props.maskData;
         // var d = _.map(maskData, (obj) => {
         //     console.log("d", data);
         //     // return data
         // })
         // var data = _.find(maskData, this.props.mask);
-        
+
         // console.log("data",data);
 
 
@@ -42,19 +47,23 @@ import _ from 'lodash';
         //         }
         //         // this.findMask(maskData);
         //     } 
-            
-                
-            
-            //console.log("result", result);
+
+
+
+        //console.log("result", result);
         //})
 
     }
 
     render() {
         return (
-        <div className="mask-container">            
-            <span className="mask-icon" onClick={this.maskClickHandler}>Mask</span>
-        </div>
+            <div className="mask-container">
+                {this.props.isMasked ?
+                    <span className="mask-icon" onClick={this.unMaskClickHandler}>Unmask</span>
+                    :
+                    <span className="mask-icon" onClick={this.maskClickHandler}>Mask</span>
+                }
+            </div>
         )
     }
 }

@@ -237,7 +237,7 @@ class rjvObject extends React.Component {
 
             if (Array.isArray(variables)) {
                 newPath[newPath.length - 1] = newPath[newPath.length - 1] + '[' + name + ']'
-                newMasked = newMasked.concat(["[]", name])
+                newMasked = newMasked.concat(["[]"])
             } else {
                 newPath = path.concat([variable.name])
                 newMasked = masked.concat([variable.name])
