@@ -62,10 +62,10 @@ class VariableEditor extends React.Component {
             onUnMask,
             rjvId,
             maskData,
-            masked
+            maskPath,
         } = this.props
         const { editMode } = this.state
-        let isMasked = includes(maskData,masked)
+        let isMasked = includes(maskData,maskPath)
         return (
             <div
                 {...Theme(theme, "objectKeyVal", {

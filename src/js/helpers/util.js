@@ -54,9 +54,11 @@ export function isTheme(theme) {
     return false
 }
 
-export function includes(list, value) {
+export function includes(list=[], value) { 
+    
     let stringValue = value.toString() 
     return list.some(item => {
         return item.toString() === stringValue
     })
+    
 }

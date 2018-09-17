@@ -4,6 +4,8 @@ import Theme from './../themes/getStyle';
 import VariableMeta from './VariableMeta';
 import ObjectName from './ObjectName'
 import ObjectComponent from './DataTypes/Object'
+import {includes} from "./../helpers/util"
+
 
 //icons
 import { CollapsedIcon, ExpandedIcon } from './ToggleIcons';
@@ -40,6 +42,7 @@ export default class extends React.Component {
         const { 
             src, groupArraysAfterLength, depth, 
             name, theme, jsvRoot, namespace, parent_type,
+            maskData, maskPath,
             ...rest
         } = this.props
 
@@ -53,8 +56,9 @@ export default class extends React.Component {
 
         const size = groupArraysAfterLength
         const groups = Math.ceil(src.length / size)
+        let isMasked = includes(maskData,maskPath)
 
-        return (<div class='object-key-val'
+        return (<div class={isMasked ? 'object-key-val active':'object-key-val'}
                     {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left})}
                 >
             <ObjectName {...this.props} />

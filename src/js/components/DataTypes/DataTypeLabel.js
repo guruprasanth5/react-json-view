@@ -12,7 +12,7 @@ export default class extends React.Component {
                     class="data-type-label"
                     {...Theme(theme, "data-type-label")}
                 >
-                    {type_name}
+                    <span className="data-type-int">{type_name}</span>
                 </span>
             )
         } else {

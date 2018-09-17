@@ -18,6 +18,7 @@ import { CollapsedIcon, ExpandedIcon } from "./../ToggleIcons"
 
 //theme
 import Theme from "./../../themes/getStyle"
+import {includes} from "./../../helpers/util"
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1
@@ -172,11 +173,13 @@ class rjvObject extends React.Component {
             theme,
             jsvRoot,
             iconStyle,
-            ...rest
+            maskPath,
+            maskData,
+            ...rest,
+            
         } = this.props
-
         const { object_type, expanded } = this.state
-
+        let isMasked = includes(maskData,maskPath)
         let styles = {}
         if (!jsvRoot && parent_type !== "array_group") {
             styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT
@@ -187,7 +190,7 @@ class rjvObject extends React.Component {
 
         return (
             <div
-                class="object-key-val"
+                class={isMasked ? "object-key-val active":"object-key-val"}
                 {...Theme(theme, jsvRoot ? "jsv-root" : "objectKeyVal", styles)}
             >
                 {this.getBraceStart(object_type, expanded)}
@@ -221,9 +224,9 @@ class rjvObject extends React.Component {
             index_offset,
             groupArraysAfterLength,
             path = [],
-            masked = []
+            maskPath = [],
+            maskData,
         } = this.props
-        // console.log("path-----", path, masked)
         const { namespace, object_type } = this.state
         let theme = props.theme
         let elements = [],
@@ -232,17 +235,16 @@ class rjvObject extends React.Component {
         for (let name in variables) {
             variable = new JsonVariable(name, variables[name])
             let newPath = path.slice();
-            let newMasked = masked.slice();
+            let newMaskPath = maskPath.slice();
             // console.log("variables", newPath, variable);
 
             if (Array.isArray(variables)) {
                 newPath[newPath.length - 1] = newPath[newPath.length - 1] + '[' + name + ']'
-                newMasked = newMasked.concat(["[]"])
+                newMaskPath = newMaskPath.concat(["[]"])
             } else {
                 newPath = path.concat([variable.name])
-                newMasked = masked.concat([variable.name])
+                newMaskPath = maskPath.concat([variable.name])
             }
-            console.log("newPath",newMasked, newPath);
 
             if (parent_type == "array_group" && index_offset) {
                 variable.name = parseInt(variable.name) + index_offset
@@ -259,8 +261,9 @@ class rjvObject extends React.Component {
                         namespace={namespace.concat(variable.name)}
                         parent_type={object_type}
                         {...props}
+                        maskData = {maskData}
                         path={newPath}
-                        masked = {newMasked}
+                        maskPath = {newMaskPath}
                     />
                 )
             } else if (variable.type == "array") {
@@ -284,7 +287,8 @@ class rjvObject extends React.Component {
                         parent_type={object_type}
                         {...props}
                         path={newPath}
-                        masked = {newMasked}
+                        maskPath = {newMaskPath}
+                        maskData = {maskData}
                     />
                 )
             } else {
@@ -297,7 +301,8 @@ class rjvObject extends React.Component {
                         type={this.props.type}
                         {...props}
                         path={newPath}
-                        masked = {newMasked}
+                        maskPath = {newMaskPath}
+                        maskData = {maskData}
                     />
                 )
             }

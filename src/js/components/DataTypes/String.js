@@ -64,7 +64,7 @@ export default class extends React.Component {
                     {...style}
                     onClick={this.toggleCollapsed}
                 >
-                    "{value}"
+                   <span class="string-val"> "{value}"</span>
                 </span>
             </div>
         )

@@ -118,10 +118,10 @@ export default class extends React.Component {
             src,
             namespace,
             path,
-            masked,
+            maskPath,
             maskData
         } = this.props;
-        let isMasked = includes(maskData,masked)
+        let isMasked = includes(maskData,maskPath)
         return (
             <div {...Theme(theme, 'object-meta-data')}
                 class='object-meta-data'

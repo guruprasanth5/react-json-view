@@ -57,8 +57,8 @@ export default class extends React.Component {
         style: {},
         validationMessage: "Validation Error",
         path: [],
-        masked: [],
-        enableMask: true,
+        maskPath: [],
+        enableMask: false,
         onMask: () => { },
         onUnMask: () => { },
         maskData: []
