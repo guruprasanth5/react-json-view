@@ -20,9 +20,15 @@ class MaskIcon extends Component {
             this.props.enableMask ?
                 <div className="mask-container">
                     {this.props.isMasked ?
-                        <span className="mask-icon" onClick={this.unMaskClickHandler}>Unmask</span>
+                        <span className="mask-icon" onClick={this.unMaskClickHandler}>
+                            <span className="unmask-png"></span>
+                            <span className="mask-title">Unmask Data</span>
+                        </span>
                         :
-                        <span className="mask-icon" onClick={this.maskClickHandler}>Mask</span>
+                        <span className="mask-icon" onClick={this.maskClickHandler}>
+                            <span className="mask-png"></span>
+                            <span className="mask-title">Mask Data</span>
+                        </span>
                     }
                 </div>
             : null

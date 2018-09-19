@@ -207,7 +207,7 @@ class rjvObject extends React.Component {
                             ...Theme(theme, "brace").style,
                             paddingLeft: expanded ? "3px" : "0px"
                         }}
-                    >
+                        >
                         {object_type == "array" ? "]" : "}"}
                     </span>
                     {expanded ? null : this.getObjectMetaData(src)}

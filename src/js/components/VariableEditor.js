@@ -126,7 +126,7 @@ class VariableEditor extends React.Component {
                     <div className="vertical-align" onClick={() => {
                         this.setState({toggle:!this.state.toggle})
                     }}>
-                        <img src="https://www.shareicon.net/data/128x128/2015/10/17/657500_vertical_512x512.png" style={{"width":"20px","height":"17px"}}/>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAgCAYAAAArBentAAAAAXNSR0IArs4c6QAAANFJREFUOBFjZICChv75Agx/vrf9Y/jvwfCfgY+BkfEECzNzZV1R+mWQEkYQ0d29iPvz/y/nGRj+q4L4MMDIwPiLmZHZrq40/SQTSPArw+dydEUg8f8M/9n+/v8zDcQGK/z3n9EBxMEG/jMyGnbMnMkPVohNAboYWCET4/8D6BIwPuP//+cr0tM/ghVyM/B2Av11GyYJoyGeYckC8cEKS0vjvjKxcpoxMTJOB4bDfaD4W2BwbGNmYTYB+RimcbDT4CgEOXI0rmFRNRrXo/kab74GAGE2nzSKLEH+AAAAAElFTkSuQmCC" style={{"width":"6px","height":"17px","cursor":"pointer"}}/>
                     {this.state.toggle ? 
                         <span className="edit-icons-json">
                             {enableClipboard ? 
@@ -135,7 +135,7 @@ class VariableEditor extends React.Component {
                                     src={variable.value}
                                     clickCallback={enableClipboard}
                                     copyType="value"
-                                    name="copy"
+                                    name="Copy Value"
                                     {...{ theme, namespace }}
                                 />
                             : null}
@@ -145,7 +145,7 @@ class VariableEditor extends React.Component {
                                     hidden={editMode}
                                     src={this.props.path.join('.')}
                                     copyType="path"
-                                    name="path"
+                                    name="Copy Path"
                                     clickCallback={enableCopyPath}
                                     {...{ theme, namespace }}
                                 />
