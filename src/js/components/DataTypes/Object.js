@@ -217,7 +217,6 @@ class rjvObject extends React.Component {
     }
 
     renderObjectContents = (variables, props) => {
-        console.log("props", props);
         const {
             depth,
             parent_type,
